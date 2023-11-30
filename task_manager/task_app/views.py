@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
-
+from django import forms
 from .models import Task
 
 class IndexView(generic.ListView):
@@ -24,11 +24,22 @@ class UpdateView(generic.UpdateView):
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/update.html"
     
+    def get_form(self):
+        form = super(CreateView, self).get_form()
+        form.fields['due_date'].widget = forms.SelectDateWidget()
+        return form
+    
+    
 class CreateView(generic.CreateView):
     success_url = reverse_lazy("task_app:index")
     model = Task
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/create.html"
+    
+    def get_form(self):
+        form = super(CreateView, self).get_form()
+        form.fields['due_date'].widget = forms.SelectDateWidget()
+        return form
     
 class DeleteView(generic.DeleteView):
     model = Task

@@ -1,9 +1,12 @@
 # todos
 add user authentication/multiple users
 only let users update their own tasks
-how to make create/update page have real date selection things
+how to make create/update page have real date selection things  ---- done
 add tests
 add exception handling
+display due date on main page
+add comments to each specific task
+css/styling/beautify
 
 
 # task-manager-app
