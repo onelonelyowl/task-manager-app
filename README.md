@@ -1,3 +1,11 @@
+# todos
+add user authentication/multiple users
+only let users update their own tasks
+how to make create/update page have real date selection things
+add tests
+add exception handling
+
+
 # task-manager-app
 
 To practise what you have learned each day, you could build a task manager application:

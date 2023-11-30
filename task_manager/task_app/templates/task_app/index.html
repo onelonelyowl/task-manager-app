@@ -1,0 +1,17 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'task_app/style.css' %}">
+<h1> INDEX PAGE </h1>
+<button>
+    <a href="{% url "task_app:create" %}">create a new page</a>
+</button>
+{% if task_list %}
+    <ul>
+    {% for task in task_list %}
+        <li><a href="{% url 'task_app:detail'  task.id %}">{{ task.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tasks have been created.</p>
+{% endif %}
+
