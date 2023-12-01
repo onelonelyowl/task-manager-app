@@ -17,11 +17,13 @@
     <tr>
         <th>Task name</th>
         <th>Created by</th>
+        <th>Due on:</th>
     </tr>
     {% for task in task_list %}
     <tr>
         <td><a href="{% url 'task_app:detail'  task.id %}">{{ task.name }}</a></td>
         <td>{{task.created_by}}</td>
+        <td>{{task.due_date}}</td>
     </tr>
     {% endfor %}
 </table>
