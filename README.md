@@ -1,18 +1,18 @@
 # todos
-add user registration page
-add user authentication/multiple users, tracks what tasks are created by who -- done
-only let users update their own tasks -- done - needs better error handling clientside
-how to make create/update page have real date selection things  ---- done
+add comments to each specific task
 add tests
 add exception handling
-display due date on main page
-add comments to each specific task
 css/styling/beautify
 need to update createview to handle users who arent logged in
+only let users update their own tasks -- done - needs better error handling clientside
+how to make create/update page have real date selection things  ---- done
+add user authentication/multiple users, tracks what tasks are created by who -- done
+add user registration page -- done
+display due date on main page -- done
 
 
-user: fake_user
-pw: shitty_password
+
+registration page taken from https://learndjango.com/tutorials/django-signup-tutorial
 
 # task-manager-app
 

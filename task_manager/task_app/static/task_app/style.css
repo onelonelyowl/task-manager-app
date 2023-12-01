@@ -1,5 +1,8 @@
 .overdue {
-    color:red;
+    color:red !important;
     background-color: black;
+}
+.overdue a {
+    color: red;
 }
 
