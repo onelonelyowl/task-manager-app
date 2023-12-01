@@ -5,6 +5,10 @@
 <button>
     <a href="{% url "task_app:create" %}">create a new page</a>
 </button>
+<span>you are currently logged in as: {{user}}
+<button>
+    <a href="{% url "logout" %}"> logout</a>
+</button>
 {% if task_list %}
     <ul>
     {% for task in task_list %}

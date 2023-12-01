@@ -1,5 +1,5 @@
 # todos
-add user authentication/multiple users
+add user authentication/multiple users, tracks what tasks are created by who
 only let users update their own tasks
 how to make create/update page have real date selection things  ---- done
 add tests
@@ -7,7 +7,11 @@ add exception handling
 display due date on main page
 add comments to each specific task
 css/styling/beautify
+need to update createview to handle users who arent logged in
 
+
+user: fake_user
+pw: shitty_password
 
 # task-manager-app
 

@@ -2,11 +2,14 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django import forms
 from .models import Task
+from django.core.exceptions import ValidationError
+
 
 class IndexView(generic.ListView):
     template_name = "task_app/index.html"
@@ -23,23 +26,36 @@ class UpdateView(generic.UpdateView):
     model = Task
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/update.html"
+    success_url = reverse_lazy("task_app:index")
     
     def get_form(self):
-        form = super(CreateView, self).get_form()
+        form = super(UpdateView, self).get_form()
         form.fields['due_date'].widget = forms.SelectDateWidget()
         return form
     
+    def form_valid(self, form):
+        if form.instance.created_by != self.request.user:
+            raise ValidationError("You cannot edit a task that is not yours")
+        else:
+            return super().form_valid(form)
+            
     
-class CreateView(generic.CreateView):
+    
+class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("task_app:index")
     model = Task
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/create.html"
     
     def get_form(self):
-        form = super(CreateView, self).get_form()
+        form = super(TaskCreateView, self).get_form()
         form.fields['due_date'].widget = forms.SelectDateWidget()
         return form
+    
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        ##### WE NEED TO HANDLE IF A USER IS NOT LOGGED IN HERE
+        return super().form_valid(form)
     
 class DeleteView(generic.DeleteView):
     model = Task
