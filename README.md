@@ -1,6 +1,7 @@
 # todos
-add user authentication/multiple users, tracks what tasks are created by who
-only let users update their own tasks
+add user registration page
+add user authentication/multiple users, tracks what tasks are created by who -- done
+only let users update their own tasks -- done - needs better error handling clientside
 how to make create/update page have real date selection things  ---- done
 add tests
 add exception handling
