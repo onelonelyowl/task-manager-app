@@ -1,4 +1,5 @@
 # todos
+make a requirements txt so people can reproduce the venv
 add comments to each specific task
 add tests
 add exception handling
