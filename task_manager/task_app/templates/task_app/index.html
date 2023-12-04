@@ -1,26 +1,25 @@
-{% load static %}
-
-<link rel="stylesheet" href="{% static 'task_app/style.css' %}">
+<head>
+    <title>{% block title %}{%endblock%}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
 <h1> INDEX PAGE </h1>
-<button>
-    <a href="{% url "task_app:create" %}">create a new page</a>
-</button>
+<a class="btn btn-primary" role="button" href="{% url "task_app:create" %}">Create a new page</a>
 <span>you are currently logged in as: {{user}}
-<button>
-    <a href="{% url "logout" %}"> logout</a>
-</button>
+<a class="btn btn-primary" role="button" href="{% url "logout" %}">Logout</a> </span>
 
 
 {% if task_list %}
 
-<table>
+<table class="table">
     <tr>
         <th>Task name</th>
         <th>Created by</th>
         <th>Due on:</th>
     </tr>
     {% for task in task_list %}
-    <tr class="{% if task.is_overdue %}overdue{% endif %}">
+    <tr class="{% if task.is_overdue %}table-warning{% endif %}">
         <td><a href="{% url 'task_app:detail'  task.id %}">{{ task.name }}</a></td>
         <td>{{task.created_by}}</td>
         <td>{{task.due_date}}</td>
