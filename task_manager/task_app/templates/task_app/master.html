@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{%endblock%}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+<h1 class="display-4">{% block headline %}{% endblock %}</h1>
+
+<div class="topbar">
+    <a class="btn btn-primary" role="button" href="{% url "task_app:create" %}">Create a <strong>new page</strong></a>
+    <span class="btn btn-primary">Currently logged in as: <strong> {{user}} </strong> </span>
+    <a class="btn btn-primary" role="button" href="{% url "logout" %}"><strong>Logout</strong></a> 
+</div>
+
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

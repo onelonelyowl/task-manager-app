@@ -1,18 +1,21 @@
-<head>
-    <title>{% block title %}{%endblock%}</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<h1> INDEX PAGE </h1>
-<a class="btn btn-primary" role="button" href="{% url "task_app:create" %}">Create a new page</a>
-<span>you are currently logged in as: {{user}}
-<a class="btn btn-primary" role="button" href="{% url "logout" %}">Logout</a> </span>
+{% extends "task_app/master.html" %}
 
+{% block title %}
+    All tasks list
+{% endblock %}
+
+{% block headline %}
+    Task list
+{% endblock %}
+
+
+{% block content %}
+
+<body class="mx-3">
 
 {% if task_list %}
 
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>Task name</th>
         <th>Created by</th>
@@ -32,3 +35,6 @@
     <p>No tasks have been created.</p>
 {% endif %}
 
+</body>
+
+{% endblock %}
