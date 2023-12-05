@@ -6,7 +6,7 @@
 {% block content %}
 <div class="taskinfo ml-4">
     <p class="pt-3"><strong>Title:</strong> {{ task.name }}</p>
-    <p><strong>Description:</strong> <a href="">{{ task.description }}</a></p>
+    <p><strong>Description:</strong>{{ task.description }}</p>
     <!-- author detail link not yet defined -->
     <p><strong>Due on:</strong> {{ task.due_date }}</p>
     <p><strong>Created by:</strong> {{ task.created_by }}</p>

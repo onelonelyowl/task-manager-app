@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "accounts",
     "bootstrap5",
+    'django_bootstrap_icons',
 ]
 
 MIDDLEWARE = [

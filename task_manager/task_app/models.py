@@ -19,7 +19,7 @@ class Task(models.Model):
         delta = self.due_date - timezone.now()
         days, seconds = delta.days, delta.seconds
         hours = days * 24 + seconds // 3600
-        return hours
+        return abs(hours)
 
 class Comment(models.Model):
     post = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comments')
