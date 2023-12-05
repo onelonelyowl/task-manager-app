@@ -1,9 +1,21 @@
-<h1> Create page </h1>
+{% extends "task_app/master.html" %}
 
+{% block title %} Create page {% endblock %}
+
+{% block headline %} New page form {% endblock %}
+
+{% block content %}
 <form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
+{% for field in form %}
+    <div class="form-group my-3">
+        {{ field.errors }}
+        {{ field.label_tag }} {{field}}
+        {% if field.help_text %}
+        <p class="help">{{field.help_text|safe}} </p>
+        {% endif %}
+    </div>
+{% endfor %}
+    <input class="btn btn-primary" type="submit" value="Save">
 </form>
-<button>
-    <a href="{% url "task_app:index" %}">To index</a>
-</button>
+<a class="btn btn-primary my-3" role="button" href="{% url "task_app:index" %}">To index</a>
+{% endblock %}

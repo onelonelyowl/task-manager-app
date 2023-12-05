@@ -28,10 +28,12 @@ class UpdateView(generic.UpdateView):
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/update.html"
     success_url = reverse_lazy("task_app:index")
+
     
     def get_form(self):
         form = super(UpdateView, self).get_form()
         form.fields['due_date'].widget = forms.SelectDateWidget()
+        form.fields['name'].widget.attrs['class'] = 'form-control'
         return form
     
     def form_valid(self, form):
@@ -47,10 +49,15 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/create.html"
+
     
     def get_form(self):
         form = super(TaskCreateView, self).get_form()
+        for visible in form.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
         form.fields['due_date'].widget = forms.SelectDateWidget()
+        form.fields['is_completed'].widget.attrs['class'] = 'form-check-input'
+
         return form
     
     def form_valid(self, form):

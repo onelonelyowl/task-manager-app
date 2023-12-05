@@ -3,6 +3,7 @@ make a requirements txt so people can reproduce the venv
 add comments to each specific task
 add tests
 add exception handling
+get a custom font
 css/styling/beautify
 need to update createview to handle users who arent logged in
 only let users update their own tasks -- done - needs better error handling clientside
