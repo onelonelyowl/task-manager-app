@@ -4,19 +4,17 @@
 {% endblock %}
 
 {% block content %}
-<body class="p-3"> 
-    <div class="taskinfo ml-4">
-        <p class="pt-3"><strong>Title:</strong> {{ task.name }}</p>
-        <p><strong>Description:</strong> <a href="">{{ task.description }}</a></p>
-        <!-- author detail link not yet defined -->
-        <p><strong>Due on:</strong> {{ task.due_date }}</p>
-        <p><strong>Created by:</strong> {{ task.created_by }}</p>
-        <p><strong>Completed?:</strong> {{ task.is_completed }}</p>
-    </div>
-    <div>
-        <a class="btn btn-primary" role="button" href="{% url "task_app:index" %}">Go home </a>
-        <a class="btn btn-primary" role="button" href="{% url "task_app:update" task.id %}">Update this task</a>
-        <a class="btn btn-primary" role="button" href="{% url "task_app:delete" task.id %}">Delete this task</a>
-    </div>
-</body>
+<div class="taskinfo ml-4">
+    <p class="pt-3"><strong>Title:</strong> {{ task.name }}</p>
+    <p><strong>Description:</strong> <a href="">{{ task.description }}</a></p>
+    <!-- author detail link not yet defined -->
+    <p><strong>Due on:</strong> {{ task.due_date }}</p>
+    <p><strong>Created by:</strong> {{ task.created_by }}</p>
+    <p><strong>Completed?:</strong> {{ task.is_completed }}</p>
+</div>
+<div>
+    <a class="btn btn-primary" role="button" href="{% url "task_app:index" %}">Go home </a>
+    <a class="btn btn-primary" role="button" href="{% url "task_app:update" task.id %}">Update this task</a>
+    <a class="btn btn-primary" role="button" href="{% url "task_app:delete" task.id %}">Delete this task</a>
+</div>
 {% endblock %}
