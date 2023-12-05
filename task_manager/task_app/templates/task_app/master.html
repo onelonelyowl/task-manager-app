@@ -9,8 +9,8 @@
 
 <h1 class="display-4">{% block headline %}{% endblock %}</h1>
 
-<div class="topbar">
-    <a class="btn btn-primary" role="button" href="{% url "task_app:create" %}">Create a <strong>new page</strong></a>
+<div class="topbar d-flex">
+    <a class="btn btn-primary mr-auto" role="button" href="{% url "task_app:create" %}">Create a <strong>new page</strong></a>
     <span class="btn btn-primary">Currently logged in as: <strong> {{user}} </strong> </span>
     <a class="btn btn-primary" role="button" href="{% url "logout" %}"><strong>Logout</strong></a> 
 </div>

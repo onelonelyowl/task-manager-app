@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.db.models.functions import ExtractDay
 
 class Task(models.Model):
     def __str__(self):
@@ -14,6 +15,11 @@ class Task(models.Model):
     is_completed = models.BooleanField("Is completed")
     def is_overdue(self):
         return self.due_date <= timezone.now()
+    def hours_left(self):
+        delta = self.due_date - timezone.now()
+        days, seconds = delta.days, delta.seconds
+        hours = days * 24 + seconds // 3600
+        return hours
 
 class Comment(models.Model):
     post = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comments')
