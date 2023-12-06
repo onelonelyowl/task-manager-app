@@ -1,9 +1,12 @@
 # todos
 make a requirements txt so people can reproduce the venv
 add comments to each specific task
+add an account info page - with options to update stuff like username etc
+add profile view for public view where you cannot change details etc
 add tests
 add exception handling
 get a custom font
+add an archiving features/complete button, ways to filter by already completed tasks
 css/styling/beautify
 need to update createview to handle users who arent logged in
 only let users update their own tasks -- done - needs better error handling clientside

@@ -6,19 +6,20 @@
     {% load svg %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
-<h1 class="display-4">{% block headline %}{% endblock %}</h1>
-
+<div class="headers d-flex flex-column">
+    <h1 class="display-2 align-self-center">task.ly</h1>
+    <h2 class="display-8">{% block headline %}{% endblock %}</h2>
+</div>
 <div class="topbar d-flex bd-highlight mb-3 justify-content-between">
     <div class="left">
-        <a class="btn btn-primary p-2" role="button" href="{% url "task_app:index" %}"><strong>{% svg 'house' %} Home</strong></a>
-        <a class="btn btn-primary ml-auto p-2" role="button" href="{% url "task_app:create" %}">{% svg 'file-text' %} Create a <strong>new page</strong></a>
+        <a class="btn btn-primary p-2 mr-3" role="button" href="{% url "task_app:index" %}"><strong>{% svg 'house' %} Home</strong></a>
+        <a class="btn btn-primary ml-auto p-2 mx-3" role="button" href="{% url "task_app:create" %}">{% svg 'file-text' %} Create a <strong>new page</strong></a>
     </div>
     <div>
-        <span class="btn btn-primary p-2">{% svg 'person-fill' %} Currently logged in as: <strong> {{user}} </strong> </span>
-        <a class="btn btn-primary p-2" role="button" href="{% url "logout" %}">{% svg 'person-fill-x' %}<strong>Logout</strong></a> 
+        <span class="btn btn-primary p-2 mx-3">{% svg 'person-fill' %} Currently logged in as: <strong> {{user}} </strong> </span>
+        <a class="btn btn-primary p-2 ml-3" role="button" href="{% url "logout" %}">{% svg 'person-fill-x' %}<strong>Logout</strong></a> 
     </div>
 </div>
 

@@ -10,20 +10,28 @@ from django.views import generic
 from django import forms
 from .models import Task
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 
 
-class IndexView(generic.ListView):
+
+
+class IndexView(LoginRequiredMixin, generic.ListView):
+    login_url = "login"
+    redirect_field_name = login_url
     template_name = "task_app/index.html"
     context_object_name = "task_list"
     
     def get_queryset(self) -> QuerySet[Any]:
         return Task.objects.order_by("due_date")
-    
+
+
 class DetailView(generic.DetailView):
     model = Task
     template_name = "task_app/detail.html"
     
-class UpdateView(generic.UpdateView):
+class UpdateView(LoginRequiredMixin, generic.UpdateView):
+    login_url = "login"
+    redirect_field_name = login_url
     model = Task
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/update.html"
@@ -45,6 +53,8 @@ class UpdateView(generic.UpdateView):
     
     
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
+    login_url = "login"
+    redirect_field_name = login_url
     success_url = reverse_lazy("task_app:index")
     model = Task
     fields = ["name", "description", "due_date", "is_completed"]
@@ -65,7 +75,9 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
         ##### WE NEED TO HANDLE IF A USER IS NOT LOGGED IN HERE
         return super().form_valid(form)
     
-class DeleteView(generic.DeleteView):
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
+    login_url = "login"
+    redirect_field_name = login_url
     model = Task
     success_url = reverse_lazy("task_app:index")
     template_name = "task_app/delete.html"

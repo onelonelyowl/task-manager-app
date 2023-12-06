@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{%endblock%}</title>
+    {% load bootstrap5 %}
+    {% load svg %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<div class="d-flex flex-column">
+    <h1 class="display-1 align-self-center">task.ly</h1>
+</div>
+<body>
+<div class="d-flex flex-column">
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

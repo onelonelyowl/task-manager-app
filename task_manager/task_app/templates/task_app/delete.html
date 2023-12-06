@@ -1,8 +1,22 @@
+{% extends "task_app/master.html" %}
+
+{% block title %}
+    Confirm delete?
+{% endblock %}
+
+{% block headline %}
+    Are you sure?
+{% endblock %}
+
+{% block content %}
 <form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p class="d-inline-block bg-primary text-white border border-primary rounded p-3 w-auto">Are you sure you want to delete "{{ object }}"?</p>
     {{ form }}
-    <input type="submit" value="Confirm">
+    <br>
+    <a class="btn btn-primary mr-3" role="button" href="{% url "task_app:detail" object.id %}">Return<a>
+    <input class="btn btn-primary m-3" role="button" type="submit" value="Delete">
+
 </form>
-<button>
-    <a href="{% url "task_app:detail" object.id %}">Back to page<a>
-</button>
+
+
+{% endblock %}

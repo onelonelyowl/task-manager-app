@@ -4,13 +4,47 @@
 {% endblock %}
 
 {% block content %}
-<div class="taskinfo ml-4">
-    <p class="pt-3"><strong>Title:</strong> {{ task.name }}</p>
-    <p><strong>Description:</strong>{{ task.description }}</p>
-    <!-- author detail link not yet defined -->
-    <p><strong>Due on:</strong> {{ task.due_date }}</p>
-    <p><strong>Created by:</strong> {{ task.created_by }}</p>
-    <p><strong>Completed?:</strong> {{ task.is_completed }}</p>
+<div class="taskinfo container-fluid">
+    <div class="row">
+        <div class="col-md-1">
+            <p class=""><strong>Title:</strong></p>
+        </div>
+        <div class="col">
+            {{ task.name }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p><strong>Description:</strong></p>
+        </div>
+        <div class="col">
+            {{ task.description }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p><strong>Due on:</strong></p>
+        </div>
+        <div class="col">
+            {{ task.due_date }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p><strong>Created by:</strong></p>
+        </div>
+        <div class="col">
+            {{ task.created_by }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p><strong>Completed?:</strong></p>
+        </div>
+        <div class="col-md-auto">
+            {% if task.is_completed %}✅{% else %}❌{% endif %}
+        </div>
+    </div>
 </div>
 <div>
     <a class="btn btn-primary" role="button" href="{% url "task_app:index" %}">Go home </a>
