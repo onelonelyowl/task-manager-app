@@ -3,7 +3,7 @@
 <head>
     <title>{% block title %}{%endblock%}</title>
     {% load bootstrap5 %}
-    {% load bootstrap_icons %}
+    {% load svg %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     
@@ -13,12 +13,12 @@
 
 <div class="topbar d-flex bd-highlight mb-3 justify-content-between">
     <div class="left">
-        <a class="btn btn-primary p-2" role="button" href="{% url "task_app:index" %}"><strong>{% bs_icon 'house' %} Home</strong></a>
-        <a class="btn btn-primary ml-auto p-2" role="button" href="{% url "task_app:create" %}">{% bs_icon 'file-text' %} Create a <strong>new page</strong></a>
+        <a class="btn btn-primary p-2" role="button" href="{% url "task_app:index" %}"><strong>{% svg 'house' %} Home</strong></a>
+        <a class="btn btn-primary ml-auto p-2" role="button" href="{% url "task_app:create" %}">{% svg 'file-text' %} Create a <strong>new page</strong></a>
     </div>
     <div>
-        <span class="btn btn-primary p-2">{% bs_icon 'person-fill' %} Currently logged in as: <strong> {{user}} </strong> </span>
-        <a class="btn btn-primary p-2" role="button" href="{% url "logout" %}">{% bs_icon 'person-fill-x' %}<strong>Logout</strong></a> 
+        <span class="btn btn-primary p-2">{% svg 'person-fill' %} Currently logged in as: <strong> {{user}} </strong> </span>
+        <a class="btn btn-primary p-2" role="button" href="{% url "logout" %}">{% svg 'person-fill-x' %}<strong>Logout</strong></a> 
     </div>
 </div>
 
