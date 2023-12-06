@@ -18,17 +18,17 @@
     {% endif %}
   {% endif %}
 
-  <form method="post" action="{% url 'login' %}">
+  <form method="post" class="d-flex flex-column align-items-center" action="{% url 'login' %}">
     {% csrf_token %}
     <div class="form-floating">
-      {{ form.username.label_tag }}
       {{ form.username }}
+      {{ form.username.label_tag }}
     </div>
     <div class="form-floating">
-      {{ form.password.label_tag }}
       {{ form.password }}
+      {{ form.password.label_tag }}
     </div>
-    <input type="submit" value="login">
+    <input type="submit" class="btn btn-primary" value="Login">
     <input type="hidden" name="next" value="{{ next }}">
   </form>
 
