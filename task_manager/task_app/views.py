@@ -14,7 +14,6 @@ from django.contrib.auth.decorators import login_required
 
 
 
-
 class IndexView(LoginRequiredMixin, generic.ListView):
     login_url = "login"
     redirect_field_name = login_url
