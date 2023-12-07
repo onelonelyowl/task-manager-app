@@ -1,0 +1,13 @@
+{% extends "task_app/master.html" %}
+
+{% block headline %}
+    User information
+{% endblock %}
+
+{% block content %}
+    {{ user }}
+
+
+
+    <a class"btn btn-primary" type="button" href={% url "task_app:index" %}>Update info</a>
+{% endblock %}

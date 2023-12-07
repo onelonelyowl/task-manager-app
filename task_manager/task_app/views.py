@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django import forms
-from .models import Task
+from .models import Task, User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 
@@ -24,9 +24,13 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         return Task.objects.order_by("due_date")
 
 
-class DetailView(generic.DetailView):
+class TaskDetailView(generic.DetailView):
     model = Task
     template_name = "task_app/detail.html"
+    
+class UserDetailView(generic.DetailView):
+    model = User
+    template_name = "task_app/user_detail.html"
     
 class UpdateView(LoginRequiredMixin, generic.UpdateView):
     login_url = "login"
