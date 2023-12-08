@@ -1,11 +1,12 @@
 {% extends "registration/master.html" %}
 {% block title %}Sign up{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <button type="submit">Sign Up</button>
   </form>
 {% endblock %}

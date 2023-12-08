@@ -2,6 +2,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.urls import reverse_lazy
 from django.views import generic
 from django import forms
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class UserLoginForm(AuthenticationForm):
