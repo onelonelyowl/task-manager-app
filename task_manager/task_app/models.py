@@ -9,7 +9,7 @@ class Task(models.Model):
     def __str__(self):
         return self.name
     name = models.CharField("Task name", max_length=200, default="placeholder")
-    description = models.CharField("Task description", max_length=500)
+    description = models.CharField("Task description", max_length=1500)
     due_date = models.DateTimeField("Due date")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     is_completed = models.BooleanField("Is completed")

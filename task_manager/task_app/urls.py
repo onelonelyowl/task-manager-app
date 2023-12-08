@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from task_app.views import TaskCreateView
+from task_app.views import TaskCreateView, user_update
 
 app_name = "task_app"
 urlpatterns = [
@@ -12,5 +12,6 @@ urlpatterns = [
     path("<int:pk>/update", views.UpdateView.as_view(), name="update"),
     path("create", TaskCreateView.as_view(), name="create"),
     path("<int:pk>/delete", views.DeleteView.as_view(), name="delete"),
+    path("users/<int:pk>/update", user_update, name="user_update"),
 
 ]

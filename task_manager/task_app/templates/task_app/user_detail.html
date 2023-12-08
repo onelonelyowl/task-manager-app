@@ -5,9 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    {{ user }}
-
-
-
-    <a class"btn btn-primary" type="button" href={% url "task_app:index" %}>Update info</a>
+    <h3>{{ user.first_name|title }} {{ user.last_name|title }}</h3>    
+    <h6>{{ user }}</h6>
+    <h6>{{ user.email }}</h6> 
+    <a class="btn btn-primary" type="button" href={% url "task_app:user_update" user.id %}>Update info</a>
 {% endblock %}

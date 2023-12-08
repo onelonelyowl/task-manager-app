@@ -4,15 +4,14 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django import forms
 from .models import Task, User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
-
-
+from .forms import UserUpdateForm
 
 class IndexView(LoginRequiredMixin, generic.ListView):
     login_url = "login"
@@ -53,8 +52,28 @@ class UpdateView(LoginRequiredMixin, generic.UpdateView):
         else:
             return super().form_valid(form)
             
-    
-    
+# class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
+#     login_url = "login"
+#     redirect_field_name = login_url
+#     model = User
+#     fields = ["username", "first_name", "last_name", "email"]
+#     template_name = "task_app/user_update.html"
+#     success_url = reverse_lazy("task_app:user_detail")
+#     def get_form(self):
+#         form = super(UserUpdateView, self).get_form()
+#         form.fields['first_name'].widget.attrs['required'] = True
+#         return form
+        
+def user_update(request, pk):
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, initial={'username': request.user.username})
+        if form.is_valid():
+            user = form.save()
+            return redirect('task_app:user_detail')
+    else:
+        form = UserUpdateForm()
+    return render(request, 'task_app/user_update.html', {'form': form})
+
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = "login"
     redirect_field_name = login_url
@@ -62,15 +81,14 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/create.html"
-
     
     def get_form(self):
         form = super(TaskCreateView, self).get_form()
+        form.fields['description'].widget = forms.Textarea(attrs={"rows":"5", "class":"form-control"})
         for visible in form.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
         form.fields['due_date'].widget = forms.SelectDateWidget()
         form.fields['is_completed'].widget.attrs['class'] = 'form-check-input'
-
         return form
     
     def form_valid(self, form):

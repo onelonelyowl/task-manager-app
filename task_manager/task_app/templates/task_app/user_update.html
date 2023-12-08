@@ -1,0 +1,18 @@
+{% extends "task_app/master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Updating user
+{% endblock %}
+
+{% block headline %}
+    Updating user information
+{% endblock %}
+
+{% block content %}
+<form>    
+    {{ form|crispy }}
+    <a class="btn btn-primary" type="button" href={% url "task_app:user_detail" user.id %}>Back to User info</a>
+    <input class="btn btn-primary" type="submit" value="Update">
+</form>    
+{% endblock %}
