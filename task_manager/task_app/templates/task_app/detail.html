@@ -1,4 +1,5 @@
 {% extends "task_app/master.html" %}
+{% load crispy_forms_tags %}
 {% block headline %}
     Task details
 {% endblock %}
@@ -52,6 +53,13 @@
     <a class="btn btn-primary" role="button" href="{% url "task_app:delete" task.id %}">Delete this task</a>
 </div>
 
+{% for comments in task.comments.all %}
+<p> {{ comments.text }} </p>
+{% endfor %}
 
-
+<form method="post">{% csrf_token %}
+    {{ form|crispy }}
+    {{ form.error_text }}
+    <input class="btn btn-primary" type="submit" value="Post comment">
+</form>
 {% endblock %}

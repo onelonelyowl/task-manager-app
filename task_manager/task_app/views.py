@@ -11,7 +11,7 @@ from django import forms
 from .models import Task, User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm
+from .forms import UserUpdateForm, CommentPostingForm
 
 class IndexView(LoginRequiredMixin, generic.ListView):
     login_url = "login"
@@ -22,10 +22,35 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self) -> QuerySet[Any]:
         return Task.objects.order_by("due_date")
 
+def task_detail(request, pk):
+    task = Task.objects.get(pk=pk)
+    comments = task.comments.all()
+
+    if request.method == 'POST':
+        form = CommentPostingForm(request.POST)
+        if form.is_valid():
+            creating_comment = form.save(commit=False)
+            creating_comment.created_by = request.user
+            creating_comment.task = task
+            creating_comment.save()
+            return redirect('task_app:detail', pk=task.pk)
+    else:
+        form = CommentPostingForm()
+
+    context = {
+        'task': task,
+        'comments': comments,
+        'form': form
+    }
+    return render(request, 'task_app/detail.html', context)
 
 class TaskDetailView(generic.DetailView):
     model = Task
     template_name = "task_app/detail.html"
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = CommentPostingForm()
+        return context 
     
 class UserDetailView(generic.DetailView):
     model = User
@@ -73,6 +98,7 @@ def user_update(request, pk):
     else:
         form = UserUpdateForm()
     return render(request, 'task_app/user_update.html', {'form': form})
+
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = "login"

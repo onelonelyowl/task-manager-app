@@ -22,7 +22,7 @@ class Task(models.Model):
         return abs(hours)
 
 class Comment(models.Model):
-    post = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comments')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comments')
     text = models.CharField("Comment text", max_length=500, default="placeholder")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
