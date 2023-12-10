@@ -53,10 +53,13 @@
     <a class="btn btn-primary" role="button" href="{% url "task_app:delete" task.id %}">Delete this task</a>
 </div>
 
-{% for comments in task.comments.all %}
-<p> {{ comments.text }} </p>
+<h4 class="my-3"> Comments </h4>
+{% for comment in task.comments.all %} 
+<span> <strong> {{comment.created_by}} on {{comment.created}} </strong> </span> <a class="link-primary" href="{{ task.id }}/delete_comment/{{ comment.id }}"> X </a>
+<p>{{ comment.text }}</p>
 {% endfor %}
 
+<h5> Add a new comment </h5>
 <form method="post">{% csrf_token %}
     {{ form|crispy }}
     {{ form.error_text }}

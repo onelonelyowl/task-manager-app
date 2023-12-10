@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django import forms
-from .models import Task, User
+from .models import Task, User, Comment
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, CommentPostingForm
@@ -43,6 +43,12 @@ def task_detail(request, pk):
         'form': form
     }
     return render(request, 'task_app/detail.html', context)
+
+def delete_comment(request, pk, comment_id=None):
+    task = Task.objects.get(pk=pk)
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    return redirect('task_app:detail', pk = task.pk)
 
 class TaskDetailView(generic.DetailView):
     model = Task
