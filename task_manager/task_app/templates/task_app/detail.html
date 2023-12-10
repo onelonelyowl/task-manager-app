@@ -1,5 +1,6 @@
 {% extends "task_app/master.html" %}
 {% load crispy_forms_tags %}
+{% load svg %}
 {% block headline %}
     Task details
 {% endblock %}
@@ -54,15 +55,20 @@
 </div>
 
 <h4 class="my-3"> Comments </h4>
+<div class="comments border border-primary rounded">
 {% for comment in task.comments.all %} 
-<span> <strong> {{comment.created_by}} on {{comment.created}} </strong> </span> <a class="link-primary" href="{{ task.id }}/delete_comment/{{ comment.id }}"> X </a>
-<p>{{ comment.text }}</p>
+<div class="comment p-3 m-3 border rounded border-secondary d-flex flex-column">
+    <div class="comment_header d-flex justify-content-between"><span> <strong> {{comment.created_by}} on {{comment.created}} </strong> </span> <a class="link-primary" href="{{ task.id }}/delete_comment/{{ comment.id }}"> {% svg 'trash' %} </a></div>
+    <div class="comment_content"><p>{{ comment.text }}</p></div>
+</div>
 {% endfor %}
-
-<h5> Add a new comment </h5>
+</div>
+<div class="commentform my-3">
+<h4> Add a new comment </h4>
 <form method="post">{% csrf_token %}
     {{ form|crispy }}
     {{ form.error_text }}
     <input class="btn btn-primary" type="submit" value="Post comment">
 </form>
+</div>
 {% endblock %}
