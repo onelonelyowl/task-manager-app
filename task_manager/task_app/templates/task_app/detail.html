@@ -49,11 +49,13 @@
     </div>
 </div>
 <div>
-    <a class="btn btn-primary" role="button" href="{% url "task_app:index" %}">Go home </a>
     {% if task.created_by.id == user.id %}
     <a class="btn btn-primary" role="button" href="{% url "task_app:update" task.id %}">Update this task</a>
     {% endif %}
-    <a class="btn btn-primary" role="button" href="{% url "task_app:delete" task.id %}">Delete this task</a>
+    <a class="btn btn-primary" role="button" href="{% url "task_app:delete" task.id %}"> {% svg "trash-fill" %} Delete this task</a>
+    {% if task.is_completed is False %}
+    <a class="btn btn-primary" role="button" href="{% url "task_app:complete" task.id %}"> {% svg "check-lg" %} Complete this task</a>
+    {% endif %}
 </div>
 
 <h4 class="my-3"> Comments </h4>

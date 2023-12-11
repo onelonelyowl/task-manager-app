@@ -1,19 +1,21 @@
 # todos
 make a requirements txt so people can reproduce the venv
-add comments to each specific task
 add an account info page - with options to update stuff like username etc
 add profile view for public view where you cannot change details etc
+***teh two above can be the same, just show an edit button if its ur page
 add tests
-add exception handling
 get a custom font
 add an archiving features/complete button, ways to filter by already completed tasks
 css/styling/beautify
-need to update createview to handle users who arent logged in
 only let users update their own tasks -- done - needs better error handling clientside
 how to make create/update page have real date selection things  ---- done
 add user authentication/multiple users, tracks what tasks are created by who -- done
 add user registration page -- done
 display due date on main page -- done
+add comments to each specific task -- done
+need to update createview to handle users who arent logged in -- done
+add exception handling -- turns out it is just easier to restrict what the user can do
+
 
 
 

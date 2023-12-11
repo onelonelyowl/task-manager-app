@@ -1,10 +1,11 @@
 from django.urls import path, include
 from . import views
-from task_app.views import TaskCreateView, user_update, task_detail, delete_comment
+from task_app.views import TaskCreateView, user_update, task_detail, delete_comment, complete_task
 
 app_name = "task_app"
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
+    path("completed", views.IndexViewCompleted.as_view(), name="index_completed"),
     # list view
     path("<int:pk>", task_detail, name="detail"),
     # detail view
@@ -12,6 +13,7 @@ urlpatterns = [
     path("<int:pk>/update", views.UpdateView.as_view(), name="update"),
     path("create", TaskCreateView.as_view(), name="create"),
     path("<int:pk>/delete", views.DeleteView.as_view(), name="delete"),
+    path("<int:pk>/complete", complete_task, name="complete"),
     path("users/<int:pk>/update", user_update, name="user_update"),
     # https://stackoverflow.com/questions/68592568/how-to-delete-model-data-on-button-click-django
     # need to add a route for deleting comments from the detail page

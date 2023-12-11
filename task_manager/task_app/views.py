@@ -21,7 +21,16 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = "task_list"
     
     def get_queryset(self) -> QuerySet[Any]:
-        return Task.objects.order_by("due_date")
+        return Task.objects.order_by("due_date").filter(is_completed=False)
+
+class IndexViewCompleted(LoginRequiredMixin, generic.ListView):
+    login_url = "login"
+    redirect_field_name = login_url
+    template_name = "task_app/index_completed.html"
+    context_object_name = "task_list"
+    
+    def get_queryset(self) -> QuerySet[Any]:
+        return Task.objects.order_by("due_date").filter(is_completed=True)
 
 def task_detail(request, pk):
     task = Task.objects.get(pk=pk)
@@ -49,6 +58,12 @@ def delete_comment(request, pk, comment_id=None):
     task = Task.objects.get(pk=pk)
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
+    return redirect('task_app:detail', pk = task.pk)
+
+def complete_task(request, pk):
+    task = Task.objects.get(pk=pk)
+    task.is_completed = True
+    task.save()
     return redirect('task_app:detail', pk = task.pk)
 
 class TaskDetailView(generic.DetailView):
