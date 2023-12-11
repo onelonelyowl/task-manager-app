@@ -60,7 +60,7 @@
 <div class="comments border border-primary rounded">
 {% for comment in task.comments.all %} 
 <div class="comment p-3 m-3 border rounded border-secondary d-flex flex-column">
-    <div class="comment_header d-flex justify-content-between"><span> <strong> {{comment.created_by}} on {{comment.created}} </strong> </span> <a class="link-primary" href="{{ task.id }}/delete_comment/{{ comment.id }}"> {% svg 'trash' %} </a></div>
+    <div class="comment_header d-flex justify-content-between"><span> <strong> {{comment.created_by}} on {{comment.created}} </strong> </span>{% if comment.created_by.id == user.id %} <a class="link-primary" href="{{ task.id }}/delete_comment/{{ comment.id }}"> {% svg 'trash' %} </a>{% endif %}</div>
     <div class="comment_content"><p>{{ comment.text }}</p></div>
 </div>
 {% endfor %}
