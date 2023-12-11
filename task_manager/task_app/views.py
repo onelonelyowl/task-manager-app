@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -69,7 +70,6 @@ class UpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = ["name", "description", "due_date", "is_completed"]
     template_name = "task_app/update.html"
     success_url = reverse_lazy("task_app:index")
-
     
     def get_form(self):
         form = super(UpdateView, self).get_form()
