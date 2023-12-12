@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
@@ -98,27 +98,41 @@ class UpdateView(LoginRequiredMixin, generic.UpdateView):
         else:
             return super().form_valid(form)
             
-# class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
-#     login_url = "login"
-#     redirect_field_name = login_url
-#     model = User
-#     fields = ["username", "first_name", "last_name", "email"]
-#     template_name = "task_app/user_update.html"
-#     success_url = reverse_lazy("task_app:user_detail")
-#     def get_form(self):
-#         form = super(UserUpdateView, self).get_form()
-#         form.fields['first_name'].widget.attrs['required'] = True
-#         return form
+class UserUpdateView(UserPassesTestMixin, generic.UpdateView):
+    def test_func(self):
+        obj = self.get_object()
+        return self.request.user == obj
+    def handle_no_permission(self) -> HttpResponseRedirect:
+        obj = self.get_object()
+        return redirect('task_app:user_detail', pk=obj.id)
+    login_url = "login"
+    redirect_field_name = login_url
+    
+    model = User
+    fields = ["username", "first_name", "last_name", "email"]
+    template_name = "task_app/user_update.html"
+    success_url = reverse_lazy("task_app:user_detail")
+    
+    def form_valid(self, form):
+        if form.instance.created_by != self.request.user:
+            raise ValidationError("You cannot edit a user that is not yourself")
+        else:
+            return super().form_valid(form)
         
-def user_update(request, pk):
-    if request.method == 'POST':
-        form = UserUpdateForm(request.POST, initial={'username': request.user.username})
-        if form.is_valid():
-            user = form.save()
-            return redirect('task_app:user_detail')
-    else:
-        form = UserUpdateForm()
-    return render(request, 'task_app/user_update.html', {'form': form})
+# def user_update(request, pk):
+#     def get_context_data(self, **kwargs) -> dict[str, Any]:
+#         context = super(user_update, self).get_context_data(**kwargs)
+#         context['form'] = self.form_class(instance=self.request.user, initial={'email':self.request.user.email})
+#         return context
+    
+#     if request.method == 'POST':
+#         form = UserUpdateForm(request.POST, initial={'username': request.user.username})
+#         if form.is_valid():
+#             user = form.save()
+#             return redirect('task_app:user_detail')
+#     else:
+#         form = UserUpdateForm()
+#     return render(request, 'task_app/user_update.html', {'form': form})
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
