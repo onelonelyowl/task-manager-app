@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda request: redirect('tasks/', permanent=False)),
+    path('', lambda request: redirect('tasks/', permanent=False)), #https://stackoverflow.com/questions/15706489/redirect-to-named-url-pattern-directly-from-urls-py-in-django
     path('tasks/', include('task_app.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include("accounts.urls")),
