@@ -1,12 +1,12 @@
 {% extends "task_app/master.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Updating task {% endblock %}
 
-{% block title %} Create page {% endblock %}
-
-{% block headline %} New page form {% endblock %}
+{% block headline %} Update task {% endblock %}
 
 {% block content %}
 <form method="post">{% csrf_token %}
-{% for field in form %}
+{% comment %} {% for field in form %}
     <div class="form-group my-3">
         {{ field.errors }}
         {{ field.label_tag }} {{field}}
@@ -14,8 +14,8 @@
         <p class="help">{{field.help_text|safe}} </p>
         {% endif %}
     </div>
-{% endfor %}
-    <input class="btn btn-primary" type="submit" value="Update">
+{% endfor %} {% endcomment %}
+{{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Update task">
 </form>
-<a class="btn btn-primary my-3" role="button" href="{% url "task_app:index" %}">To index</a>
 {% endblock %}
