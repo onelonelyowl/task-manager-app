@@ -78,7 +78,13 @@ class UserDetailView(generic.DetailView):
     model = User
     template_name = "task_app/user_detail.html"
     
-class UpdateView(LoginRequiredMixin, generic.UpdateView):
+class UpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    def test_func(self):
+        obj = self.get_object()
+        return self.request.user == obj
+    def handle_no_permission(self) -> HttpResponseRedirect:
+        obj = self.get_object()
+        return redirect('task_app:detail', pk=obj.id)
     login_url = "login"
     redirect_field_name = login_url
     model = Task
@@ -98,7 +104,7 @@ class UpdateView(LoginRequiredMixin, generic.UpdateView):
         else:
             return super().form_valid(form)
             
-class UserUpdateView(UserPassesTestMixin, generic.UpdateView):
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     def test_func(self):
         obj = self.get_object()
         return self.request.user == obj
