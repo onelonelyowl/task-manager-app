@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-4gy0jaf^*s(5jjmlpk8zoz(j7xjqwfun$2$06m$a^n5qx(91i8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['onelonelyowl.pythonanywhere.com']
+ALLOWED_HOSTS = [
+    'onelonelyowl.pythonanywhere.com',
+    '127.0.0.1',
+    ]
 
 
 # Application definition

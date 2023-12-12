@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block content %}
+<div class="border border-primary rounded p-3">
     <h3>{{ user.first_name|title }} {{ user.last_name|title }}</h3>    
-    <h6>{{ user }}</h6>
-    <h6>{{ user.email }}</h6> 
-    <a class="btn btn-primary" type="button" href={% url "task_app:user_update" user.id %}>Update info</a>
+    <h6>Username: <strong> {{ user }} </strong> </h6>
+    <h6>You can contact me via email at:<strong> {{ user.email }} </strong></h6> 
+</div>
+    {% if user.id == request.user.id %}<a class="btn btn-primary" type="button" href={% url "task_app:user_update" user.id %}>Update info</a> {% endif %}
 {% endblock %}

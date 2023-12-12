@@ -1,4 +1,7 @@
 # todos
+let users add bio to their page but not required on registration
+add phone styling
+add pagination to main list page and maybe to comments too
 make a requirements txt so people can reproduce the venv
 add an account info page - with options to update stuff like username etc
 add profile view for public view where you cannot change details etc
