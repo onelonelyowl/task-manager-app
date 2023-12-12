@@ -10,5 +10,5 @@
     <h6>Username: <strong> {{ user }} </strong> </h6>
     <h6>You can contact me via email at:<strong> {{ user.email }} </strong></h6> 
 </div>
-    {% if user.id == request.user.id %}<a class="btn btn-primary" type="button" href={% url "task_app:user_update" user.id %}>Update info</a> {% endif %}
+    {% if user.id == request.user.id %}<a class="btn btn-primary my-3" type="button" href={% url "task_app:user_update" user.id %}>Update info</a> {% endif %}
 {% endblock %}

@@ -11,7 +11,6 @@
 </head>
 <div class="headers d-flex flex-column">
     <h1 class="display-2 align-self-center">task.ly</h1>
-    <h2 class="display-8">{% block headline %}{% endblock %}</h2>
 </div>
 <div class="topbar d-flex bd-highlight mb-3 justify-content-between">
     <div class="left">
@@ -24,7 +23,7 @@
         <a class="btn btn-primary p-2 ml-3" role="button" href="{% url "logout" %}">{% svg 'person-fill-x' %} <strong>Logout</strong></a> 
     </div>
 </div>
-
+<h2 class="display-5 my-3">{% block headline %}{% endblock %}</h2>
 <body class="p-4">
     {% block content %}
     {% endblock %}
