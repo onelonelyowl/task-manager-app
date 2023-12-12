@@ -88,7 +88,7 @@ class UpdateView(LoginRequiredMixin, generic.UpdateView):
     
     def get_form(self):
         form = super(UpdateView, self).get_form()
-        form.fields['due_date'].widget = forms.SelectDateWidget()
+        form.fields['due_date'].widget = forms.TextInput(attrs={'type':'datetime-local'})
         form.fields['name'].widget.attrs['class'] = 'form-control'
         return form
     
@@ -134,7 +134,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
         form.fields['description'].widget = forms.Textarea(attrs={"rows":"5", "class":"form-control"})
         for visible in form.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-        form.fields['due_date'].widget = forms.SelectDateWidget()
+        form.fields['due_date'].widget = forms.TextInput(attrs={'type':'datetime-local'})
         form.fields['is_completed'].widget.attrs['class'] = 'form-check-input'
         return form
     
