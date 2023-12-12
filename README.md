@@ -1,3 +1,6 @@
+# Deployment
+You can access the website at: https://onelonelyowl.pythonanywhere.com/
+
 # todos
 let users add bio to their page but not required on registration
 add phone styling
