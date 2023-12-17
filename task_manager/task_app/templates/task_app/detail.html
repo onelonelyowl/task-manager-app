@@ -50,10 +50,10 @@
 </div>
 <div>
     {% if task.created_by.id == user.id %}
-    <a class="btn btn-primary" role="button" href="{% url "task_app:update" task.id %}">Update this task</a>
-    {% endif %}
-    {% if comment.created_by.id == user.id %}
     <a class="btn btn-primary" role="button" href="{% url "task_app:delete" task.id %}"> {% svg "trash-fill" %} Delete this task</a>
+    {% endif %}
+    {% if task.created_by.id == user.id %}
+    <a class="btn btn-primary" role="button" href="{% url "task_app:update" task.id %}"> {% svg 'pencil-fill' %} Update this task</a>
     {% endif %}
     {% if task.is_completed is False %}
     <a class="btn btn-primary" role="button" href="{% url "task_app:complete" task.id %}"> {% svg "check-lg" %} Complete this task</a>

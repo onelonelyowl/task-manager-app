@@ -11,7 +11,7 @@
 {% block content %}
 
 {% if task_list %}
-
+<div class="table-responsive">
 <table class="table table-hover">
     <tr>
         <th>Task name</th>
@@ -28,7 +28,7 @@
     </tr>
     {% endfor %}
 </table>
-
+</div>
 
 {% else %}
     <p>No tasks have been created.</p>
